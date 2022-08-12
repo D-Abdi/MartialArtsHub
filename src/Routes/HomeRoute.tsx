@@ -16,12 +16,12 @@ export default function HomeRoute() {
             <Stack.Screen
                 name="Home"
                 component={Home}
-                options={() => ({
+                options={({navigation}) => ({
                    headerShown: false,
                 })}
             />
             <Stack.Screen
-                name="Home"
+                name="Map"
                 component={Map}
                 options={() => ({
                     headerShown: false,
