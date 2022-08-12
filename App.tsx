@@ -1,20 +1,33 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from "react";
+import {createDrawerNavigator} from "@react-navigation/drawer";
+import {NavigationContainer} from "@react-navigation/native";
+import { NativeBaseProvider} from 'native-base';
+import HomeRoute from "./src/Routes/HomeRoute";
+
+import {FontAwesome5} from '@expo/vector-icons';
+
+const Drawer = createDrawerNavigator();
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    return (
+        <NativeBaseProvider>
+            <NavigationContainer>
+                <Drawer.Navigator>
+                    <Drawer.Screen name="HomeRoute" component={HomeRoute} options={{
+                        title: "Home",
+                        drawerIcon: () => (
+                            <FontAwesome5 name="home" size={24} color="black"/>
+                        ),
+                        drawerItemStyle: {
+                            marginTop: 30,
+                            backgroundColor: "white"
+                        },
+                        drawerLabelStyle: {
+                            color: "black"
+                        }
+                    }}/>
+                </Drawer.Navigator>
+            </NavigationContainer>
+        </NativeBaseProvider>
+    );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

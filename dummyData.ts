@@ -1,0 +1,42 @@
+export const dummyData = [
+    {
+        name: "Oosterbaan Gym",
+        slogan: "Touch is not enough",
+        disColor: "red.700",
+        description: "Some description",
+        discipline: "Kick boxing",
+        distance: "6km",
+        imageUrl: "https://i.postimg.cc/HnSR1NFX/oosterbaan-logo.png",
+        location: "Rotterdam, Netherlands"
+    },
+    {
+        name: "KR Boxing",
+        slogan: "Be the greatest you",
+        disColor: "blue.700",
+        description: "Some description",
+        discipline: "Boxing",
+        distance: "8km",
+        imageUrl: "https://i.postimg.cc/zBW5Fqbv/kr.png",
+        location: "Oud-Beijerland, Netherlands"
+    },
+    {
+        name: "Spider Gym",
+        slogan: "I choose you",
+        disColor: "red.700",
+        description: "Some description",
+        discipline: "Kick boxing",
+        distance: "12km",
+        imageUrl: "https://i.postimg.cc/nhLYFjYt/spider.png",
+        location: "Rotterdam, Netherlands"
+    } ,
+    {
+        name: "Ruthless MMA",
+        slogan: "A ruthless tribe",
+        disColor: "violet.700",
+        description: "Some description",
+        discipline: "MMA",
+        distance: "3km",
+        imageUrl: "https://i.postimg.cc/jdk2YxrM/ruthless.jpg",
+        location: "Rotterdam, Netherlands"
+    }
+]
