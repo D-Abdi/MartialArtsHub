@@ -9,6 +9,7 @@ import { Entypo } from '@expo/vector-icons';
 
 import {Props} from "../Home/Home";
 import {dummyData} from "../../../dummyData";
+import {Gym} from "../GymProfile/GymProfile";
 
 export const Map: React.FC<Props> = ({ navigation }) => {
     const [region, setRegion] = useState({
@@ -22,8 +23,13 @@ export const Map: React.FC<Props> = ({ navigation }) => {
             longitude: dummyData.map((x) => x.location[1]).reduce((x, y) => Math.max(x, y)),
         };
         setRegion(a)
-        console.log(region, "Region")
     }, [])
+
+    const handleCalloutPress = async (gym: Gym) => {
+        await navigation.navigate("GymProfile", {
+            gym: gym
+        });
+    }
 
     return (
         <View style={styles.container}>
@@ -41,7 +47,8 @@ export const Map: React.FC<Props> = ({ navigation }) => {
                         key={index}
                         coordinate={{ latitude : gym.location[0] , longitude : gym.location[1] }}
                         title={gym.name}
-                        description={gym.description}
+                        description={gym.locationName}
+                        onCalloutPress={() => handleCalloutPress(gym)}
                     />
                 ))}
             </MapView>
