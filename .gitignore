@@ -3,6 +3,7 @@ node_modules/
 dist/
 npm-debug.*
 *.env
+.env
 *.jks
 *.p8
 *.p12
