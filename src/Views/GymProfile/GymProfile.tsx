@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import MapView from "react-native-maps";
+import MapView, {Marker} from "react-native-maps";
 import {AspectRatio, Box, Button, Center, HStack, Image, ScrollView, Skeleton, Stack, Text, VStack} from "native-base";
 import {TouchableOpacity} from "react-native";
 import {styles} from "../../Styles/Styles";
@@ -125,7 +125,22 @@ export const GymProfile: React.FC<GymAndNavigation> = ({navigation, route}) => {
                         </Box>
                         <Box marginX={5} marginTop={6}>
                             <Text mb={5} fontWeight={900} fontSize={18} color="#7c3aed">Location</Text>
-                            <MapView style={styles.profileMap}/>
+                            <MapView
+                                style={styles.profileMap}
+                                initialRegion={{
+                                    latitude: gym.location[0],
+                                    longitude: gym.location[1],
+                                    latitudeDelta: 0.0922,
+                                    longitudeDelta: 0.0421,
+                                }}
+
+                            >
+                                <Marker
+                                    coordinate={{ latitude : gym.location[0] , longitude : gym.location[1] }}
+                                    title={gym.name}
+                                    description={gym.locationName}
+                                />
+                            </MapView>
                         </Box>
                         <Box marginX={5} marginY={6}>
                             <HStack alignItems="center" space={4} justifyContent="space-between">
