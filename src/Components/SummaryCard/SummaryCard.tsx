@@ -71,7 +71,7 @@ export const SummaryCard: React.FC<SummaryCard> = (
                 </Box>
                 <Stack p="4" space={3}>
                     <Stack space={2}>
-                        <Heading size="md" ml="-1">
+                        <Heading size="md" ml="-1" color="#4c1d95">
                             {gym.name}
                         </Heading>
                         <Text fontSize="xs" _light={{
@@ -97,10 +97,10 @@ export const SummaryCard: React.FC<SummaryCard> = (
                             <Button onPress={() => navToProfileHandler(gym)} backgroundColor="indigo.600" marginRight={5}>Profile</Button>
                             <Button backgroundColor="violet.900">Location</Button>
                         </Box>
-                        <Text color="coolGray.600" _dark={{
+                        <Text color="#4c1d95" _dark={{
                             color: "warmGray.200"
                         }} fontWeight="400">
-                            {gym.distance} <FontAwesome5 name="location-arrow" size={16} color="rgb(0, 28, 64)"/>
+                            {gym.distance} <FontAwesome5 name="location-arrow" size={16} color="#8b5cf6"/>
                         </Text>
                     </HStack>
                 </Stack>
