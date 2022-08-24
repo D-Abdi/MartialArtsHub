@@ -1,4 +1,6 @@
-export const dummyData = [
+import {Gym} from "./src/Views/GymProfile/GymProfile";
+
+export const dummyData: Gym[] = [
     {
         name: "Oosterbaan Gym",
         slogan: "Touch is not enough",

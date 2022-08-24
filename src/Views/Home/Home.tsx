@@ -3,7 +3,7 @@ import {FlatList, Box} from "native-base";
 import {SummaryCard} from "../../Components/SummaryCard/SummaryCard"
 import {styles} from "../../Styles/Styles";
 
-import {AntDesign} from "@expo/vector-icons";
+import { FontAwesome5 } from '@expo/vector-icons';
 import {dummyData} from "../../../dummyData";
 import React from "react";
 
@@ -21,14 +21,8 @@ export const Home: React.FC<Props> = ({navigation}) => {
             <FlatList data={dummyData} renderItem={({item}) => (
                 <Box my={3}>
                     <SummaryCard
-                        imageUrl={item.imageUrl}
-                        disColor={item.disColor}
-                        name={item.name}
-                        discipline={item.discipline}
-                        slogan={item.slogan}
-                        description={item.description}
-                        location={item.location}
-                        distance={item.distance}
+                        navigation={navigation}
+                        gym={item}
                     />
                 </Box>
             )}/>
@@ -39,7 +33,7 @@ export const Home: React.FC<Props> = ({navigation}) => {
                     styles.homeSwitchBtn,
                 ]}
             >
-                <AntDesign name="pluscircle" size={60} color="black"/>
+                <FontAwesome5 name="map-marker-alt" size={30} color="#8b5cf6" />
             </TouchableOpacity>
         </Box>
     )
