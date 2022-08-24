@@ -14,12 +14,18 @@ export interface Gym {
     discipline: string;
     slogan: string;
     description: string;
-    location: string;
+    locationName: string;
     distance: string;
 }
 
+export interface GymProfile extends Gym {
+    location: number[];
+    reviews: string[];
+    contact: string;
+}
+
 export interface GymAndNavigation {
-    gym: Gym;
+    gym: GymProfile;
     navigation: any;
     route: any;
 }
@@ -32,8 +38,11 @@ export const GymProfile: React.FC<GymAndNavigation> = ({navigation, route}) => {
         discipline: "",
         slogan: "",
         description: "",
-        location: "",
-        distance: ""
+        locationName: "",
+        distance: "",
+        location:[],
+        reviews: [],
+        contact: "",
     });
     useEffect(() => {
         console.log(route?.params?.gym, "PARAMS")
@@ -96,7 +105,7 @@ export const GymProfile: React.FC<GymAndNavigation> = ({navigation, route}) => {
                                 <Text color="rgb(0, 28, 64)" _dark={{
                                     color: "warmGray.200"
                                 }} fontWeight="400">
-                                    {gym.location} {gym.distance} <FontAwesome5 name="location-arrow" size={16}
+                                    {gym.locationName} {gym.distance} <FontAwesome5 name="location-arrow" size={16}
                                                                                 color="rgb(0, 28, 64)"/>
                                 </Text>
                             </HStack>

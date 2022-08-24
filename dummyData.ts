@@ -9,7 +9,7 @@ export const dummyData: Gym[] = [
         discipline: "Kick boxing",
         distance: "6km",
         imageUrl: "https://i.postimg.cc/HnSR1NFX/oosterbaan-logo.png",
-        location: "Rotterdam, Netherlands"
+        locationName: "Rotterdam, Netherlands"
     },
     {
         name: "KR Boxing",
@@ -19,7 +19,7 @@ export const dummyData: Gym[] = [
         discipline: "Boxing",
         distance: "8km",
         imageUrl: "https://i.postimg.cc/zBW5Fqbv/kr.png",
-        location: "Oud-Beijerland, Netherlands"
+        locationName: "Oud-Beijerland, Netherlands"
     },
     {
         name: "Spider Gym",
@@ -29,7 +29,7 @@ export const dummyData: Gym[] = [
         discipline: "Kick boxing",
         distance: "12km",
         imageUrl: "https://i.postimg.cc/nhLYFjYt/spider.png",
-        location: "Rotterdam, Netherlands"
+        locationName: "Rotterdam, Netherlands"
     } ,
     {
         name: "Ruthless MMA",
@@ -39,6 +39,6 @@ export const dummyData: Gym[] = [
         discipline: "MMA",
         distance: "3km",
         imageUrl: "https://i.postimg.cc/jdk2YxrM/ruthless.jpg",
-        location: "Rotterdam, Netherlands"
+        locationName: "Rotterdam, Netherlands"
     }
 ]

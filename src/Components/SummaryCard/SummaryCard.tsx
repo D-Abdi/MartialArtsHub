@@ -90,7 +90,7 @@ export const SummaryCard: React.FC<SummaryCard> = (
                         <Text color="coolGray.600" _dark={{
                             color: "warmGray.200"
                         }} fontWeight="400">
-                            {gym.location}
+                            {gym.locationName}
                         </Text>
                     </Stack>
                     <HStack alignItems="center" space={4} justifyContent="space-between">
