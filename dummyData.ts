@@ -12,6 +12,7 @@ export const dummyData: GymProfile[] = [
         locationName: "Rotterdam, Netherlands",
         location: [51.88406747326786, 4.525270869388511],
         reviews: ["Excellent gym!", "Great people!", "The sparring is hard, but i learned a lot!"],
+        rating: 5,
         phone: "0104193222",
         email: "info@oosterbaangym.nl",
         website: "https://www.oosterbaangym.nl/"
@@ -27,6 +28,7 @@ export const dummyData: GymProfile[] = [
         locationName: "Oud-Beijerland, Netherlands",
         location: [51.81648349501465, 4.417425898221408],
         reviews: ["Excellent gym!", "Great people!", "The sparring is hard, but i learned a lot!"],
+        rating: 5,
         phone: "0650925283",
         email: "info@krboxing.nl",
         website: "http://www.krboxingpt.nl/"
@@ -42,6 +44,7 @@ export const dummyData: GymProfile[] = [
         locationName: "Rotterdam, Netherlands",
         location: [51.92791579914902, 4.4592164577377815],
         reviews: ["Excellent gym!", "Great people!", "The sparring is hard, but i learned a lot!"],
+        rating: 3,
         phone: "0640024761",
         email: "info@spidergym.nl",
         website: "http://www.spidergym.net/"
@@ -57,6 +60,7 @@ export const dummyData: GymProfile[] = [
         locationName: "Rotterdam, Netherlands",
         location: [51.929108643054484, 4.479928082885345],
         reviews: ["Excellent gym!", "Great people!", "The sparring is hard, but i learned a lot!"],
+        rating: 4,
         phone: "0650626228",
         email: "info@ruthless.nl",
         website: "http://www.mmarotterdam.nl/"

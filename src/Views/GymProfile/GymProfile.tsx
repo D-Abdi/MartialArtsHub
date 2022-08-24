@@ -21,6 +21,7 @@ export interface Gym {
 export interface GymProfile extends Gym {
     location: number[];
     reviews?: string[];
+    rating?: number;
     phone?: string;
     email?: string;
     website?: string;
@@ -44,6 +45,7 @@ export const GymProfile: React.FC<GymAndNavigation> = ({navigation, route}) => {
         distance: "",
         location:[],
         reviews: [],
+        rating: null,
         contact: "",
     });
     useEffect(() => {

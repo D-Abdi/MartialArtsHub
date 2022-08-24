@@ -29,7 +29,6 @@ export const SummaryCard: React.FC<SummaryCard> = (
     ) => {
 
     const navToProfileHandler = async (gym: Gym) => {
-        console.log(gym, "GYM BEFORE NAV")
         await navigation.navigate("GymProfile", {
             gym: gym
         });
@@ -101,7 +100,7 @@ export const SummaryCard: React.FC<SummaryCard> = (
                         <Text color="coolGray.600" _dark={{
                             color: "warmGray.200"
                         }} fontWeight="400">
-                            {gym.distance} <FontAwesome5 name="location-arrow" size={16} color="black"/>
+                            {gym.distance} <FontAwesome5 name="location-arrow" size={16} color="rgb(0, 28, 64)"/>
                         </Text>
                     </HStack>
                 </Stack>
