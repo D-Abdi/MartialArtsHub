@@ -20,8 +20,10 @@ export interface Gym {
 
 export interface GymProfile extends Gym {
     location: number[];
-    reviews: string[];
-    contact: string;
+    reviews?: string[];
+    phone?: string;
+    email?: string;
+    website?: string;
 }
 
 export interface GymAndNavigation {
