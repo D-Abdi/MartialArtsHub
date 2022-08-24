@@ -133,7 +133,7 @@ export const GymProfile: React.FC<GymAndNavigation> = ({navigation, route}) => {
                                     latitudeDelta: 0.0922,
                                     longitudeDelta: 0.0421,
                                 }}
-
+                                scrollEnabled={false}
                             >
                                 <Marker
                                     coordinate={{ latitude : gym.location[0] , longitude : gym.location[1] }}
