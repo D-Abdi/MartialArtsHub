@@ -28,10 +28,10 @@ export const styles =StyleSheet.create({
         width: 75,
         display: "flex",
         justifyContent: "center",
-        backgroundColor: "rgb(0, 28, 64)",
+        backgroundColor: "#7f1d1d",
         alignItems: "center",
         borderRadius: 50,
-        borderColor: "rgb(0, 28, 64)",
+        borderColor: "#7f1d1d",
         padding: 10
     },
     homeSwitchBtn: {
@@ -43,10 +43,10 @@ export const styles =StyleSheet.create({
         width: 75,
         display: "flex",
         justifyContent: "center",
-        backgroundColor: "rgb(0, 28, 64)",
+        backgroundColor: "#7f1d1d",
         alignItems: "center",
         borderRadius: 50,
-        borderColor: "rgb(0, 28, 64)",
+        borderColor: "#7f1d1d",
         padding: 10
     },
     input: {
@@ -56,4 +56,34 @@ export const styles =StyleSheet.create({
         marginHorizontal: 20,
         backgroundColor: "#fff",
     },
+    authBtnContainer: {
+        width: "100%",
+      display: "flex",
+        alignItems: "center",
+        textAlign: "center"
+    },
+    authBtnLog: {
+        width: 200,
+        height: 50,
+        marginBottom: 12,
+        paddingHorizontal: 20,
+        paddingVertical: 10,
+        borderWidth: 1,
+        borderColor: "#dc2626",
+        borderRadius: 10,
+        textAlign: "center",
+        backgroundColor: "#dc2626",
+    },
+    authBtnRegister: {
+        width: 200,
+        height: 50,
+        marginBottom: 12,
+        paddingHorizontal: 20,
+        paddingVertical: 10,
+        borderWidth: 1,
+        borderColor: "#dc2626",
+        borderRadius: 10,
+        textAlign: "center",
+        backgroundColor: "#fff",
+    }
 })

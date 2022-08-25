@@ -71,7 +71,7 @@ export const GymProfile: React.FC<GymAndNavigation> = ({navigation, route}) => {
                     styles.backBtn,
                 ]}
             >
-                <AntDesign name="leftcircle" size={30} color="#8b5cf6"/>
+                <AntDesign name="leftcircle" size={30} color="#dc2626"/>
             </TouchableOpacity>
             <ScrollView>
                 {gym.imageUrl !== "" ?
@@ -82,24 +82,24 @@ export const GymProfile: React.FC<GymAndNavigation> = ({navigation, route}) => {
                             }} alt="image"/>
                         </AspectRatio>
                         <Box marginTop={6}>
-                            <Text fontStyle="italic" fontSize={22} fontWeight={600} color="#7c3aed"
+                            <Text fontStyle="italic" fontSize={22} fontWeight={600} color="#991b1b"
                                   textAlign="center">"{gym.slogan}"</Text>
                             <Text fontWeight={900} fontSize={18} textAlign="center"
-                                  color="#7c3aed">- {gym.name}</Text>
+                                  color="#991b1b">- {gym.name}</Text>
                         </Box>
                         <Box marginX={5} marginTop={6} width={120} bg={gym.disColor} borderRadius="20px">
                             <Text paddingX={4} paddingY={2} color="#fff" textAlign="center">{gym.discipline}</Text>
                         </Box>
                         <Box marginX={5} marginTop={6}>
-                            <Text mb={5} fontWeight={900} fontSize={18} color="#7c3aed">Description</Text>
+                            <Text mb={5} fontWeight={900} fontSize={18} color="#991b1b">Description</Text>
                             <Text fontSize={12}>{gym.description}</Text>
                         </Box>
                         <Box marginX={5} marginTop={6}>
-                            <Text mb={5} fontWeight={900} fontSize={18} color="#7c3aed">Reviews</Text>
+                            <Text mb={5} fontWeight={900} fontSize={18} color="#991b1b">Reviews</Text>
                             <VStack space={5}>
                                 {gym.reviews.map((item, index) => (
                                     <>
-                                    <Stack key={index} direction="row" mt={1.5} space={4}>
+                                    <Stack key={index + Math.random()} direction="row" mt={1.5} space={4}>
                                         <Text maxW={250} fontStyle="italic" fontWeight={400} color="light.500">"{item.review}"</Text>
                                         <Text maxW={150}>- {item.name}</Text>
                                         <Text maxW={150} fontWeight={600}>{item.rating} <AntDesign name="star" size={18} color="gold" /></Text>
@@ -109,7 +109,7 @@ export const GymProfile: React.FC<GymAndNavigation> = ({navigation, route}) => {
                             </VStack>
                         </Box>
                         <Box marginX={5} marginTop={6}>
-                            <Text mb={5} fontWeight={900} fontSize={18} color="#7c3aed">Contact</Text>
+                            <Text mb={5} fontWeight={900} fontSize={18} color="#991b1b">Contact</Text>
                             <HStack space={3} mt={2}>
                                 <Stack direction="column" space={3}>
                                     <FontAwesome name="phone" size={24} color="#0ea5e9" />
@@ -124,7 +124,7 @@ export const GymProfile: React.FC<GymAndNavigation> = ({navigation, route}) => {
                             </HStack>
                         </Box>
                         <Box marginX={5} marginTop={6}>
-                            <Text mb={5} fontWeight={900} fontSize={18} color="#7c3aed">Location</Text>
+                            <Text mb={5} fontWeight={900} fontSize={18} color="#991b1b">Location</Text>
                             <MapView
                                 style={styles.profileMap}
                                 initialRegion={{
@@ -145,13 +145,13 @@ export const GymProfile: React.FC<GymAndNavigation> = ({navigation, route}) => {
                         <Box marginX={5} marginY={6}>
                             <HStack alignItems="center" space={4} justifyContent="space-between">
                                 <Box flexDir="row" justifyContent="space-between">
-                                    <Button backgroundColor="violet.900">View location</Button>
+                                    <Button backgroundColor="red.800">View location</Button>
                                 </Box>
-                                <Text color="#7c3aed" _dark={{
+                                <Text color="#991b1b" _dark={{
                                     color: "warmGray.200"
                                 }} fontWeight="400">
                                     {gym.locationName} {gym.distance} <FontAwesome5 name="location-arrow" size={16}
-                                                                                    color="#7c3aed"/>
+                                                                                    color="#991b1b"/>
                                 </Text>
                             </HStack>
                         </Box>

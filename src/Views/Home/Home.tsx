@@ -8,7 +8,7 @@ import {dummyData} from "../../../dummyData";
 import React from "react";
 
 export type Props = {
-    navigation: any
+    navigation: any;
 }
 
 export const Home: React.FC<Props> = ({navigation}) => {
@@ -33,7 +33,7 @@ export const Home: React.FC<Props> = ({navigation}) => {
                     styles.homeSwitchBtn,
                 ]}
             >
-                <FontAwesome5 name="map-marker-alt" size={30} color="#8b5cf6" />
+                <FontAwesome5 name="map-marker-alt" size={30} color="#dc2626" />
             </TouchableOpacity>
         </Box>
     )

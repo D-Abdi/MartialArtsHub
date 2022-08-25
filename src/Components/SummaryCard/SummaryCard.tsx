@@ -2,7 +2,6 @@ import React from "react";
 import {
     AspectRatio,
     Box,
-    Button,
     Center,
     Heading,
     HStack,
@@ -18,6 +17,7 @@ import {
 import {
     Gym,
 } from "../../Views/GymProfile/GymProfile";
+import {TouchableOpacity} from "react-native";
 
 interface SummaryCard {
     gym: Gym,
@@ -32,6 +32,12 @@ export const SummaryCard: React.FC<SummaryCard> = (
         await navigation.navigate("GymProfile", {
             gym: gym
         });
+    }
+
+    const navToMapHandler = async (gym: Gym) => {
+        await navigation.navigate("Map", {
+            gym: gym
+        })
     }
 
     return (
@@ -71,11 +77,11 @@ export const SummaryCard: React.FC<SummaryCard> = (
                 </Box>
                 <Stack p="4" space={3}>
                     <Stack space={2}>
-                        <Heading size="md" ml="-1" color="#4c1d95">
+                        <Heading size="md" ml="-1" color="#991b1b">
                             {gym.name}
                         </Heading>
                         <Text fontSize="xs" _light={{
-                            color: gym.disColor
+                            color: "#991b1b"
                         }} _dark={{
                             color: gym.disColor
                         }} fontWeight="500" ml="-0.5" mt="-1">
@@ -94,13 +100,15 @@ export const SummaryCard: React.FC<SummaryCard> = (
                     </Stack>
                     <HStack alignItems="center" space={4} justifyContent="space-between">
                         <Box flexDir="row" justifyContent="space-between">
-                            <Button onPress={() => navToProfileHandler(gym)} backgroundColor="indigo.600" marginRight={5}>Profile</Button>
-                            <Button backgroundColor="violet.900">Location</Button>
+                            <TouchableOpacity onPress={() => navToProfileHandler(gym)} style={{backgroundColor: "#ef4444", marginRight: 5,
+                                paddingHorizontal: 10, paddingVertical: 12, borderRadius: 5,}}><Text color="#fff">Profile</Text></TouchableOpacity>
+                            <TouchableOpacity onPress={() => navToMapHandler(gym)} style={{backgroundColor: "#991b1b", marginRight: 5,
+                                paddingHorizontal: 10, paddingVertical: 12, borderRadius: 5,}}><Text color="#fff">Location</Text></TouchableOpacity>
                         </Box>
-                        <Text color="#4c1d95" _dark={{
+                        <Text color="#dc2626" _dark={{
                             color: "warmGray.200"
                         }} fontWeight="400">
-                            {gym.distance} <FontAwesome5 name="location-arrow" size={16} color="#8b5cf6"/>
+                            {gym.distance} <FontAwesome5 name="location-arrow" size={16} color="#dc2626"/>
                         </Text>
                     </HStack>
                 </Stack>
