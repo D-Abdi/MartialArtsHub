@@ -11,14 +11,17 @@ export const Favorites: React.FC<Props> = ({ navigation, route }) => {
     const toast = useToast();
 
     useEffect(() => {
-        fetchGymsFromLS().catch(error => {
-             toast.show({
-                description: `Something went wrong! - ${error}`,
-                placement: "top",
-            })
+        navigation.addListener('focus', () => {
+            fetchGymsFromLS().catch(error => {
+                 toast.show({
+                    description: `Something went wrong! - ${error}`,
+                    placement: "top",
+                })
+            });
         });
-    }, [navigation, route])
+    }, [navigation, route, AsyncStorage])
 
+    // Fetch data from LS and place them in state
     const fetchGymsFromLS = async () => {
         try {
             const jsonValue = await AsyncStorage.getItem('allGyms')
@@ -46,7 +49,13 @@ export const Favorites: React.FC<Props> = ({ navigation, route }) => {
     }
 
     return (
-        <Box height="100%">
+        <Box height="100%"
+             _dark={{
+                 bg: 'coolGray.800',
+                 color: "#fff"
+             }} _light={{
+            bg: 'warmGray.50',}}
+        >
             <FlatList data={favoriteGyms} renderItem={({item}) => (
                 <Box my={3}>
                     <SummaryCard

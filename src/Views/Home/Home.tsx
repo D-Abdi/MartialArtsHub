@@ -21,12 +21,14 @@ export const Home: React.FC<Props> = ({navigation, route}) => {
             fetchGymsFromDB().catch();
     }, [navigation, route])
 
+    // Nav to Map screen
     const switchToMapHandler = async () => {
         await navigation.navigate("Map", {
             allGyms: allGyms
         });
     }
 
+    // Fetch gyms from db
     const fetchGymsFromDB = async () => {
         const {data, error} = await supabase.from('gyms').select(`
             id,
@@ -58,7 +60,13 @@ export const Home: React.FC<Props> = ({navigation, route}) => {
     }
 
     return (
-        <Box height="100%">
+        <Box height="100%"
+             _dark={{
+                 bg: 'coolGray.800',
+                 color: "#fff"
+             }} _light={{
+                bg: 'warmGray.50',}}
+        >
             <FlatList data={allGyms} renderItem={({item}) => (
                 <Box my={3}>
                     <SummaryCard

@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react"
 import MapView, {Marker} from 'react-native-maps';
+import * as Location from 'expo-location';
 
 import {Center, Skeleton, View, VStack} from "native-base"
 import {TouchableOpacity} from "react-native";
@@ -26,12 +27,37 @@ export const Map: React.FC<GymAndNavigation> = ({navigation, route}) => {
         email: "",
         website: ""
     }]);
+    const [location, setLocation] = useState({
+        coords: {
+            longitude: 0,
+            latitude: 0,
+        }
+    });
+    const [errorMsg, setErrorMsg] = useState(null);
     const [region, setRegion] = useState({
         latitude: 0,
         longitude: 0
     });
     let regionSet: boolean = false;
 
+    // find and set current user location
+    useEffect(() => {
+        (async () => {
+            let { status } = await Location.requestForegroundPermissionsAsync();
+            if (status !== 'granted') {
+                // @ts-ignore
+                setErrorMsg('Permission to access location was denied');
+                return;
+            }
+
+            let newLoc = await Location.getCurrentPositionAsync({});
+            console.log(newLoc, "Location")
+            // @ts-ignore
+            setLocation(newLoc);
+        })();
+    }, []);
+
+    // Set all gyms from param
     useEffect(() => {
         if (route?.params?.allGyms) {
             setAllGyms(route?.params?.allGyms)
@@ -40,6 +66,7 @@ export const Map: React.FC<GymAndNavigation> = ({navigation, route}) => {
             })
         }
 
+        // Set region based on gym params
         if (route?.params?.gym) {
             setRegion({
                 latitude: route.params.gym.latitude,
@@ -51,6 +78,8 @@ export const Map: React.FC<GymAndNavigation> = ({navigation, route}) => {
         }
     }, [])
 
+    // If no region is set from a gym from route, calc the outer most long and lat
+    // Set region
     useEffect(() => {
         if (!regionSet) {
             if (allGyms && allGyms.length > 0) {
@@ -63,6 +92,7 @@ export const Map: React.FC<GymAndNavigation> = ({navigation, route}) => {
         }
     }, [allGyms])
 
+    // Nav to specific gym
     const handleCalloutPress = async (gym: Gym) => {
         await navigation.navigate("GymProfile", {
             gym: gym
@@ -70,7 +100,13 @@ export const Map: React.FC<GymAndNavigation> = ({navigation, route}) => {
     }
 
     return (
-        <View style={styles.container}>
+        <View style={styles.container}
+              _dark={{
+                  bg: 'coolGray.800',
+                  color: "#fff"
+              }} _light={{
+            bg: 'warmGray.50',}}
+        >
             {allGyms && allGyms.length >  0 && allGyms[0].latitude !== 0 && allGyms[0].longitude !== 0 ?
                 <>
                     <MapView
@@ -82,6 +118,7 @@ export const Map: React.FC<GymAndNavigation> = ({navigation, route}) => {
                             longitudeDelta: .8,
                         }}
                     >
+                        <Marker coordinate={{latitude: location?.coords?.latitude, longitude: location?.coords?.longitude}} title="You"></Marker>
                         {allGyms.map((gym, index) => (
                             <Marker
                                 key={index}

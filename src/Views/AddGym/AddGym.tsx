@@ -33,6 +33,7 @@ export const AddGym: React.FC<Props> = ({navigation}) => {
     });
     const toast = useToast();
 
+    // Add Gym to DB
     const onSubmit = async (newGym: any) => {
         const {data, error} = await supabase
             .from('gyms')
@@ -74,7 +75,13 @@ export const AddGym: React.FC<Props> = ({navigation}) => {
     }
 
     return (
-        <ScrollView>
+        <ScrollView
+            _dark={{
+                bg: 'coolGray.800',
+                color: "#fff"
+            }} _light={{
+            bg: 'warmGray.50',}}
+        >
             <View style={styles.addContainer}>
                 <Text fontSize={16} my={2}>Gym Name</Text>
                 <Controller

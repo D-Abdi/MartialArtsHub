@@ -91,6 +91,8 @@ export const GymProfile: React.FC<GymAndNavigation> = ({navigation, route}) => {
     )
     const toast = useToast();
 
+    // Fetch data from LS and place them in state
+    // Set gym from route params
     useEffect(() => {
         fetchGymsFromLS().catch()
         if (route?.params?.gym !== null && route?.params?.gym !== undefined) {
@@ -101,6 +103,7 @@ export const GymProfile: React.FC<GymAndNavigation> = ({navigation, route}) => {
         }
     })
 
+    // Fetch data from LS and place them in state
     const fetchGymsFromLS = async () => {
         try {
             const jsonValue = await AsyncStorage.getItem('allGyms')
@@ -131,7 +134,7 @@ export const GymProfile: React.FC<GymAndNavigation> = ({navigation, route}) => {
                 await AsyncStorage.setItem("allGyms", favoriteData)
             }
             await toast.show({
-                description: `Added gym to favorites!`,
+                description: `Added gym to local storage!`,
                 placement: "top",
             })
         } catch (error) {
@@ -152,7 +155,7 @@ export const GymProfile: React.FC<GymAndNavigation> = ({navigation, route}) => {
                 await AsyncStorage.setItem("allGyms", stringifiedGyms)
             }
             await toast.show({
-                description: `Removed from favorites!`,
+                description: `Removed from local storage!`,
                 placement: "top",
             })
         } catch (error) {
@@ -173,7 +176,13 @@ export const GymProfile: React.FC<GymAndNavigation> = ({navigation, route}) => {
             >
                 <AntDesign name="leftcircle" size={30} color="#dc2626"/>
             </TouchableOpacity>
-            <ScrollView>
+            <ScrollView
+                _dark={{
+                    bg: 'coolGray.800',
+                    color: "#fff"
+                }} _light={{
+                bg: 'warmGray.50',}}
+            >
                 {gym.imageUrl !== "" && gym.latitude !== 0 && gym.longitude !== 0 ?
                     <>
                         <AspectRatio w="100%" ratio={16 / 9}>

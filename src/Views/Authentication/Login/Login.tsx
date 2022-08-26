@@ -10,6 +10,7 @@ export const Login: React.FC<Props> = ({navigation}) => {
     const [password, setPassword] = useState('')
     const toast = useToast();
 
+    // If session is present, nav to Home
     useEffect(() => {
         const session = supabase.auth.session()
         if (session) {
@@ -17,6 +18,7 @@ export const Login: React.FC<Props> = ({navigation}) => {
         }
     }, [])
 
+    //  Check credentials in db then log in
     const handleLogin = async (email: string, password: string) => {
         const {error, user} = await supabase.auth.signIn({email, password})
         if (!error && user) {
@@ -39,7 +41,13 @@ export const Login: React.FC<Props> = ({navigation}) => {
     }
 
     return (
-        <View style={styles.container}>
+        <View style={styles.container}
+              _dark={{
+                  bg: 'coolGray.800',
+                  color: "#fff"
+              }} _light={{
+            bg: 'warmGray.50',}}
+        >
                 <Image
                     source={require("../../../assets/images/logo.jpg")}
                     alt="image"
