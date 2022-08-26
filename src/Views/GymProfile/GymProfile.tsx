@@ -18,7 +18,8 @@ export interface Gym {
 }
 
 export interface GymProfile extends Gym {
-    location: number[];
+    latitude: number;
+    longitude: number;
     reviews?: {
         review: string,
         name: string,
@@ -45,7 +46,8 @@ export const GymProfile: React.FC<GymAndNavigation> = ({navigation, route}) => {
         description: "",
         locationName: "",
         distance: "",
-        location: [],
+        latitude: 0,
+        longitude: 0,
         reviews: [{rating: null, review: null, name: null}],
         rating: null,
         phone: "",
@@ -53,10 +55,8 @@ export const GymProfile: React.FC<GymAndNavigation> = ({navigation, route}) => {
         website: ""
     });
     useEffect(() => {
-        console.log(route?.params?.gym, "PARAMS")
         if (route?.params?.gym !== null && route?.params?.gym !== undefined) {
             setGym(route.params.gym);
-            console.log(gym, "Gym profile")
             navigation.setParams({
                 gym: null
             })
@@ -74,7 +74,7 @@ export const GymProfile: React.FC<GymAndNavigation> = ({navigation, route}) => {
                 <AntDesign name="leftcircle" size={30} color="#dc2626"/>
             </TouchableOpacity>
             <ScrollView>
-                {gym.imageUrl !== "" ?
+                {gym.imageUrl !== "" && gym.latitude !== 0 && gym.longitude !== 0 ?
                     <>
                         <AspectRatio w="100%" ratio={16 / 9}>
                             <Image source={{
@@ -94,20 +94,20 @@ export const GymProfile: React.FC<GymAndNavigation> = ({navigation, route}) => {
                             <Text mb={5} fontWeight={900} fontSize={18} color="#991b1b">Description</Text>
                             <Text fontSize={12}>{gym.description}</Text>
                         </Box>
-                        <Box marginX={5} marginTop={6}>
-                            <Text mb={5} fontWeight={900} fontSize={18} color="#991b1b">Reviews</Text>
-                            <VStack space={5}>
-                                {gym.reviews.map((item, index) => (
-                                    <>
-                                    <Stack key={index + Math.random()} direction="row" mt={1.5} space={4}>
-                                        <Text maxW={250} fontStyle="italic" fontWeight={400} color="light.500">"{item.review}"</Text>
-                                        <Text maxW={150}>- {item.name}</Text>
-                                        <Text maxW={150} fontWeight={600}>{item.rating} <AntDesign name="star" size={18} color="gold" /></Text>
-                                    </Stack>
-                                    </>
-                                ))}
-                            </VStack>
-                        </Box>
+                        {/*<Box marginX={5} marginTop={6}>*/}
+                        {/*    <Text mb={5} fontWeight={900} fontSize={18} color="#991b1b">Reviews</Text>*/}
+                        {/*    <VStack space={5}>*/}
+                        {/*        {gym.reviews.map((item, index) => (*/}
+                        {/*            <>*/}
+                        {/*            <Stack key={index + Math.random()} direction="row" mt={1.5} space={4}>*/}
+                        {/*                <Text maxW={250} fontStyle="italic" fontWeight={400} color="light.500">"{item.review}"</Text>*/}
+                        {/*                <Text maxW={150}>- {item.name}</Text>*/}
+                        {/*                <Text maxW={150} fontWeight={600}>{item.rating} <AntDesign name="star" size={18} color="gold" /></Text>*/}
+                        {/*            </Stack>*/}
+                        {/*            </>*/}
+                        {/*        ))}*/}
+                        {/*    </VStack>*/}
+                        {/*</Box>*/}
                         <Box marginX={5} marginTop={6}>
                             <Text mb={5} fontWeight={900} fontSize={18} color="#991b1b">Contact</Text>
                             <HStack space={3} mt={2}>
@@ -128,15 +128,15 @@ export const GymProfile: React.FC<GymAndNavigation> = ({navigation, route}) => {
                             <MapView
                                 style={styles.profileMap}
                                 initialRegion={{
-                                    latitude: gym.location[0],
-                                    longitude: gym.location[1],
+                                    latitude: gym.latitude,
+                                    longitude: gym.longitude,
                                     latitudeDelta: 0.0922,
                                     longitudeDelta: 0.0421,
                                 }}
                                 scrollEnabled={false}
                             >
                                 <Marker
-                                    coordinate={{ latitude : gym.location[0] , longitude : gym.location[1] }}
+                                    coordinate={{ latitude : gym.latitude , longitude : gym.longitude }}
                                     title={gym.name}
                                     description={gym.locationName}
                                 />

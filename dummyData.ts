@@ -10,7 +10,8 @@ export const dummyData: GymProfile[] = [
         distance: "6km",
         imageUrl: "https://i.postimg.cc/HnSR1NFX/oosterbaan-logo.png",
         locationName: "Rotterdam, Netherlands",
-        location: [51.88406747326786, 4.525270869388511],
+        latitude: 51.929108643054484,
+        longitude: 4.479928082885345,
         reviews: [
             {review: "Excellent gym!", rating: 5, name: "John Doe"},
             {review: "Excellent gym!", rating: 5, name: "John Doe"},
@@ -29,7 +30,8 @@ export const dummyData: GymProfile[] = [
         distance: "8km",
         imageUrl: "https://i.postimg.cc/zBW5Fqbv/kr.png",
         locationName: "Oud-Beijerland, Netherlands",
-        location: [51.81648349501465, 4.417425898221408],
+        latitude: 51.81648349501465,
+        longitude: 4.417425898221408,
         reviews: [
             {review: "Excellent gym!", rating: 5, name: "John Doe"},
             {review: "Excellent gym!", rating: 5, name: "John Doe"},
@@ -48,7 +50,8 @@ export const dummyData: GymProfile[] = [
         distance: "12km",
         imageUrl: "https://i.postimg.cc/nhLYFjYt/spider.png",
         locationName: "Rotterdam, Netherlands",
-        location: [51.92791579914902, 4.4592164577377815],
+        latitude: 51.92791579914902,
+        longitude: 4.4592164577377815,
         reviews: [
             {review: "Excellent gym!", rating: 5, name: "John Doe"},
             {review: "Excellent gym!", rating: 5, name: "John Doe"},
@@ -67,7 +70,8 @@ export const dummyData: GymProfile[] = [
         distance: "3km",
         imageUrl: "https://i.postimg.cc/jdk2YxrM/ruthless.jpg",
         locationName: "Rotterdam, Netherlands",
-        location: [51.929108643054484, 4.479928082885345],
+        latitude: 51.929108643054484,
+        longitude: 4.479928082885345,
         reviews: [
             {review: "Excellent gym!", rating: 5, name: "John Doe"},
             {review: "Excellent gym!", rating: 5, name: "John Doe"},

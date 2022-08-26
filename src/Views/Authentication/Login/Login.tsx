@@ -18,7 +18,6 @@ export const Login: React.FC<Props> = ({navigation}) => {
     }, [])
 
     const handleLogin = async (email: string, password: string) => {
-        console.log('login pressed')
         const {error, user} = await supabase.auth.signIn({email, password})
         if (!error && user) {
             await toast.show({

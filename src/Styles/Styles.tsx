@@ -12,7 +12,7 @@ export const styles =StyleSheet.create({
     },
     map: {
         width: Dimensions.get('window').width,
-        height: Dimensions.get('window').height,
+        height: "100%",
     },
     profileMap: {
         width: "100%",
@@ -36,7 +36,7 @@ export const styles =StyleSheet.create({
     },
     homeSwitchBtn: {
         position: "absolute",
-        bottom: 30,
+        bottom: 75,
         right: 30,
         borderWidth: 5,
         height: 75,

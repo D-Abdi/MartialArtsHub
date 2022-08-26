@@ -7,22 +7,24 @@ import {SummaryCard} from "../../Components/SummaryCard/SummaryCard"
 import {styles} from "../../Styles/Styles";
 
 import { FontAwesome5 } from '@expo/vector-icons';
-import {dummyData} from "../../../dummyData";
 
 export type Props = {
     navigation: any;
+    route: any;
 }
 
-export const Home: React.FC<Props> = ({navigation}) => {
+export const Home: React.FC<Props> = ({navigation, route}) => {
     const [allGyms, setAllGyms] = useState([]);
     const toast = useToast();
 
     useEffect(() => {
         fetchGyms().catch();
-    }, [])
+    }, [navigation, route])
 
     const switchToMapHandler = async () => {
-        await navigation.navigate("Map");
+        await navigation.navigate("Map", {
+            allGyms: allGyms
+        });
     }
 
     const fetchGyms = async () => {
@@ -48,18 +50,16 @@ export const Home: React.FC<Props> = ({navigation}) => {
             // @ts-ignore
             setAllGyms(data)
             await toast.show({
-                description: "Gym retrieved!",
+                description: "Gyms retrieved!",
                 placement: "top",
-                // @ts-ignore
-                status: "success"
             })
         }
 
     }
 
     return (
-        <Box>
-            <FlatList data={dummyData} renderItem={({item}) => (
+        <Box height="100%">
+            <FlatList data={allGyms} renderItem={({item}) => (
                 <Box my={3}>
                     <SummaryCard
                         navigation={navigation}

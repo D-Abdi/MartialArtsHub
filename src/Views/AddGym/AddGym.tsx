@@ -14,7 +14,6 @@ export const AddGym: React.FC<Props> = ({navigation}) => {
     const {
         control,
         handleSubmit,
-        formState: {errors}
     } = useForm({
         defaultValues: {
             imageUrl: "",
@@ -35,7 +34,6 @@ export const AddGym: React.FC<Props> = ({navigation}) => {
     const toast = useToast();
 
     const onSubmit = async (newGym: any) => {
-        console.log(newGym, "new Gym")
         const {data, error} = await supabase
             .from('gyms')
             .insert(
@@ -48,15 +46,14 @@ export const AddGym: React.FC<Props> = ({navigation}) => {
                     description: newGym.description,
                     locationName: newGym.locationName,
                     distance: newGym.distance,
-                    longitude: newGym.longitude,
-                    latitude: newGym.latitude,
+                    longitude: Number(newGym.longitude),
+                    latitude: Number(newGym.latitude),
                     phone: newGym.phone,
                     email: newGym.email,
                     website: newGym.website
                 }]
             )
         if (error) {
-            console.log(error, "Error")
             await toast.show({
                 description: `Something went wrong! Error: ${error.message}`,
                 placement: "top",
@@ -74,10 +71,6 @@ export const AddGym: React.FC<Props> = ({navigation}) => {
                 status: "success"
             })
         }
-    }
-
-    const switchToMapHandler = async () => {
-        await navigation.navigate("Map");
     }
 
     return (
