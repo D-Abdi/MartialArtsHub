@@ -52,7 +52,6 @@ export const Map: React.FC<GymAndNavigation> = ({navigation, route}) => {
     }, [])
 
     useEffect(() => {
-        console.log("GYMSSS")
         if (!regionSet) {
             if (allGyms && allGyms.length > 0) {
                 let globalRegion: { latitude: number; longitude: number; } = {

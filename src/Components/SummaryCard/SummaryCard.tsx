@@ -20,12 +20,13 @@ import {
 import {TouchableOpacity} from "react-native";
 
 interface SummaryCard {
-    gym: Gym,
+    allGyms: Gym[];
+    gym: Gym;
     navigation: any;
 }
 
 export const SummaryCard: React.FC<SummaryCard> = (
-    {navigation, gym},
+    {navigation, gym, allGyms},
     ) => {
 
     const navToProfileHandler = async (gym: Gym) => {
@@ -36,7 +37,8 @@ export const SummaryCard: React.FC<SummaryCard> = (
 
     const navToMapHandler = async (gym: Gym) => {
         await navigation.navigate("Map", {
-            gym: gym
+            gym: gym,
+            allGyms: allGyms
         })
     }
 
