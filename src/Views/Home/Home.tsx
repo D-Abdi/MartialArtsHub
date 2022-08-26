@@ -7,9 +7,6 @@ import {SummaryCard} from "../../Components/SummaryCard/SummaryCard"
 import {styles} from "../../Styles/Styles";
 
 import {FontAwesome5} from '@expo/vector-icons';
-import {dummyData} from "../../../dummyData";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import {GymProfile} from "../GymProfile/GymProfile";
 
 export type Props = {
     navigation: any;
@@ -21,8 +18,7 @@ export const Home: React.FC<Props> = ({navigation, route}) => {
     const toast = useToast();
 
     useEffect(  () => {
-        console.log("Called!!")
-        fetchGymsFromLS().catch();
+            fetchGymsFromDB().catch();
     }, [navigation, route])
 
     const switchToMapHandler = async () => {
@@ -31,21 +27,7 @@ export const Home: React.FC<Props> = ({navigation, route}) => {
         });
     }
 
-    const fetchGymsFromLS = async () => {
-        const jsonData: any = await AsyncStorage.getItem("allGyms");
-        console.log(jsonData)
-        if (jsonData !== null) {
-            setAllGyms(JSON.parse(jsonData))
-            await toast.show({
-                description: "Gyms retrieved from local storage!",
-                placement: "top",
-            })
-        } else {
-            fetchGyms().catch();
-        }
-    }
-
-    const fetchGyms = async () => {
+    const fetchGymsFromDB = async () => {
         const {data, error} = await supabase.from('gyms').select(`
             id,
             name,
@@ -67,8 +49,6 @@ export const Home: React.FC<Props> = ({navigation, route}) => {
         } else {
             // @ts-ignore
             setAllGyms(data)
-            const jsonData = JSON.stringify(data);
-            await AsyncStorage.setItem("allGyms", jsonData)
             await toast.show({
                 description: "Gyms retrieved!",
                 placement: "top",
