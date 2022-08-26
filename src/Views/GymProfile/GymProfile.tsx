@@ -1,10 +1,24 @@
 import React, {useEffect, useState} from "react";
 import MapView, {Marker} from "react-native-maps";
-import {AspectRatio, Box, Button, Center, HStack, Image, ScrollView, Skeleton, Stack, Text, VStack} from "native-base";
+import {
+    AspectRatio,
+    Box,
+    Button,
+    Center,
+    HStack,
+    Image,
+    ScrollView,
+    Skeleton,
+    Stack,
+    Text,
+    useToast,
+    VStack
+} from "native-base";
 import {TouchableOpacity} from "react-native";
 import {styles} from "../../Styles/Styles";
 
-import {AntDesign, FontAwesome,FontAwesome5, Ionicons, Foundation } from '@expo/vector-icons';
+import {AntDesign, FontAwesome, FontAwesome5, Ionicons, Foundation} from '@expo/vector-icons';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export interface Gym {
     imageUrl: string;
@@ -54,14 +68,100 @@ export const GymProfile: React.FC<GymAndNavigation> = ({navigation, route}) => {
         email: "",
         website: ""
     });
+    const [favoriteGyms, setFavoriteGyms] = useState(
+        [
+            {
+                imageUrl: "",
+                disColor: "",
+                name: "",
+                discipline: "",
+                slogan: "",
+                description: "",
+                locationName: "",
+                distance: "",
+                latitude: 0,
+                longitude: 0,
+                reviews: [{rating: null, review: null, name: null}],
+                rating: null,
+                phone: "",
+                email: "",
+                website: ""
+            }
+        ]
+    )
+    const toast = useToast();
+
     useEffect(() => {
+        fetchGymsFromLS().catch()
         if (route?.params?.gym !== null && route?.params?.gym !== undefined) {
             setGym(route.params.gym);
             navigation.setParams({
                 gym: null
             })
         }
-    }, [])
+    })
+
+    const fetchGymsFromLS = async () => {
+        try {
+            const jsonValue = await AsyncStorage.getItem('allGyms')
+            if (jsonValue !== null) {
+                await setFavoriteGyms(JSON.parse(jsonValue));
+            } else {
+                setFavoriteGyms([]);
+
+            }
+        } catch (error) {
+            await toast.show({
+                description: `Something went wrong! - ${error}`,
+                placement: "top",
+            })
+        }
+    }
+
+    const handleAddToFavorites = async () => {
+        try {
+            const favoritesData = await AsyncStorage.getItem('allGyms')
+            if (favoritesData !== null) {
+                const favorites = JSON.parse(favoritesData);
+                favorites.push(gym);
+                const newFavoritesData = JSON.stringify(favorites);
+                await AsyncStorage.setItem("allGyms", newFavoritesData)
+            } else {
+                const favoriteData = JSON.stringify([gym]);
+                await AsyncStorage.setItem("allGyms", favoriteData)
+            }
+            await toast.show({
+                description: `Added gym to favorites!`,
+                placement: "top",
+            })
+        } catch (error) {
+            await toast.show({
+                description: `Something went wrong! - ${error}`,
+                placement: "top",
+            })
+        }
+    }
+
+    const handleRemoveFromFavorites = async () => {
+        try {
+            const favoritesData = await AsyncStorage.getItem('allGyms')
+            if (favoritesData !== null) {
+                const favorites = JSON.parse(favoritesData);
+                const newFavoriteGyms = favorites.filter((item: GymProfile) => item.name !== gym.name)
+                const stringifiedGyms = JSON.stringify(newFavoriteGyms);
+                await AsyncStorage.setItem("allGyms", stringifiedGyms)
+            }
+            await toast.show({
+                description: `Removed from favorites!`,
+                placement: "top",
+            })
+        } catch (error) {
+            await toast.show({
+                description: `Something went wrong! - ${error}`,
+                placement: "top",
+            })
+        }
+    }
 
     return (
         <>
@@ -94,33 +194,19 @@ export const GymProfile: React.FC<GymAndNavigation> = ({navigation, route}) => {
                             <Text mb={5} fontWeight={900} fontSize={18} color="#991b1b">Description</Text>
                             <Text fontSize={12}>{gym.description}</Text>
                         </Box>
-                        {/*<Box marginX={5} marginTop={6}>*/}
-                        {/*    <Text mb={5} fontWeight={900} fontSize={18} color="#991b1b">Reviews</Text>*/}
-                        {/*    <VStack space={5}>*/}
-                        {/*        {gym.reviews.map((item, index) => (*/}
-                        {/*            <>*/}
-                        {/*            <Stack key={index + Math.random()} direction="row" mt={1.5} space={4}>*/}
-                        {/*                <Text maxW={250} fontStyle="italic" fontWeight={400} color="light.500">"{item.review}"</Text>*/}
-                        {/*                <Text maxW={150}>- {item.name}</Text>*/}
-                        {/*                <Text maxW={150} fontWeight={600}>{item.rating} <AntDesign name="star" size={18} color="gold" /></Text>*/}
-                        {/*            </Stack>*/}
-                        {/*            </>*/}
-                        {/*        ))}*/}
-                        {/*    </VStack>*/}
-                        {/*</Box>*/}
                         <Box marginX={5} marginTop={6}>
                             <Text mb={5} fontWeight={900} fontSize={18} color="#991b1b">Contact</Text>
                             <HStack space={3} mt={2}>
                                 <Stack direction="column" space={3}>
-                                    <FontAwesome name="phone" size={24} color="#0ea5e9" />
-                                    <Ionicons name="mail" size={24} color="#0ea5e9" />
-                                    <Foundation name="web" size={24} color="#0ea5e9" />
+                                    <FontAwesome name="phone" size={24} color="#0ea5e9"/>
+                                    <Ionicons name="mail" size={24} color="#0ea5e9"/>
+                                    <Foundation name="web" size={24} color="#0ea5e9"/>
                                 </Stack>
-                                        <Stack direction="column" space={4}>
-                                            <Text maxW={500} color="#0ea5e9">{gym.phone}</Text>
-                                            <Text maxW={500} color="#0ea5e9">{gym.email}</Text>
-                                            <Text maxW={500} color="#0ea5e9">{gym.website} </Text>
-                                        </Stack>
+                                <Stack direction="column" space={4}>
+                                    <Text maxW={500} color="#0ea5e9">{gym.phone}</Text>
+                                    <Text maxW={500} color="#0ea5e9">{gym.email}</Text>
+                                    <Text maxW={500} color="#0ea5e9">{gym.website} </Text>
+                                </Stack>
                             </HStack>
                         </Box>
                         <Box marginX={5} marginTop={6}>
@@ -136,7 +222,7 @@ export const GymProfile: React.FC<GymAndNavigation> = ({navigation, route}) => {
                                 scrollEnabled={false}
                             >
                                 <Marker
-                                    coordinate={{ latitude : gym.latitude , longitude : gym.longitude }}
+                                    coordinate={{latitude: gym.latitude, longitude: gym.longitude}}
                                     title={gym.name}
                                     description={gym.locationName}
                                 />
@@ -154,6 +240,22 @@ export const GymProfile: React.FC<GymAndNavigation> = ({navigation, route}) => {
                                                                                     color="#991b1b"/>
                                 </Text>
                             </HStack>
+                        </Box>
+                        <Box marginX={5} marginY={6}>
+                            <Text mb={5} fontWeight={900} fontSize={18} color="#991b1b">Action</Text>
+                            <Box flexDir="row" justifyContent="space-between">
+                                {favoriteGyms.find((item) => item.name === gym.name) ? (
+                                    <TouchableOpacity onPress={() => handleRemoveFromFavorites()} style={{
+                                        backgroundColor: "#ef4444", marginRight: 5,
+                                        paddingHorizontal: 10, paddingVertical: 12, borderRadius: 5,
+                                    }}><Text color="#fff">Remove from favorites</Text></TouchableOpacity>
+                                ) :
+                                    <TouchableOpacity onPress={() => handleAddToFavorites()} style={{
+                                        backgroundColor: "#ef4444", marginRight: 5,
+                                        paddingHorizontal: 10, paddingVertical: 12, borderRadius: 5,
+                                    }}><Text color="#fff">Add to favorites</Text></TouchableOpacity>
+                                }
+                            </Box>
                         </Box>
                     </>
                     : <Center w="100%">

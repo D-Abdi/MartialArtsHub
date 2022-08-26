@@ -23,12 +23,14 @@ export const Favorites: React.FC<Props> = ({ navigation, route }) => {
         try {
             const jsonValue = await AsyncStorage.getItem('allGyms')
             if (jsonValue !== null) {
+                console.log(jsonValue, "VALUE")
                 await setFavoriteGyms(JSON.parse(jsonValue));
                 await toast.show({
                     description: "Favorites retrieved!",
                     placement: "top",
                 })
             } else {
+                setFavoriteGyms([]);
                 await toast.show({
                     description: "No favorites yet!",
                     placement: "top",
