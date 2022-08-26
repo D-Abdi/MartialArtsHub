@@ -53,7 +53,6 @@ export const styles =StyleSheet.create({
         marginBottom: 0,
         padding: 10,
         borderRadius: 5,
-        marginHorizontal: 20,
         backgroundColor: "#fff",
     },
     authBtnContainer: {

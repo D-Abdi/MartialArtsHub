@@ -1,19 +1,60 @@
+import React, {useEffect, useState} from "react";
+import {supabase} from "../../../supabase";
+
 import {TouchableOpacity} from "react-native";
-import {FlatList, Box} from "native-base";
+import {FlatList, Box, useToast} from "native-base";
 import {SummaryCard} from "../../Components/SummaryCard/SummaryCard"
 import {styles} from "../../Styles/Styles";
 
 import { FontAwesome5 } from '@expo/vector-icons';
 import {dummyData} from "../../../dummyData";
-import React from "react";
 
 export type Props = {
     navigation: any;
 }
 
 export const Home: React.FC<Props> = ({navigation}) => {
-     const switchToMapHandler = async () => {
+    const [allGyms, setAllGyms] = useState([]);
+    const toast = useToast();
+
+    useEffect(() => {
+        fetchGyms().catch();
+    }, [])
+
+    const switchToMapHandler = async () => {
         await navigation.navigate("Map");
+    }
+
+    const fetchGyms = async () => {
+        const { data, error } = await supabase.from('gyms').select(`
+            id,
+            name,
+            description,
+            slogan,
+            discipline,
+            locationName,
+            disColor,
+            imageUrl,
+            distance,
+            phone,
+            email,
+            website,
+            longitude,
+            latitude
+        `)
+        if (error) {
+            await console.log("ERROR", error)
+        } else {
+            // @ts-ignore
+            setAllGyms(data)
+            await toast.show({
+                description: "Gym retrieved!",
+                placement: "top",
+                // @ts-ignore
+                status: "success"
+            })
+        }
+
     }
 
     return (
